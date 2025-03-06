@@ -1,0 +1,18 @@
+.MuiStepConnector-line {
+    display: none !important;
+  }
+  
+  .MuiStepConnector-root {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.349);
+    margin-top: 2rem;
+  }
+  
+  .MuiStepConnector-active,
+  .MuiStepConnector-completed {
+    background-color: tomato;
+  }
+
+  .css-3yr9gi-MuiStepLabel-root.MuiStepLabel-alternativeLabel{
+    margin-top: 2rem;
+  }
