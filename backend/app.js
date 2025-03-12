@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use(
   cors({
-    origin: "*" || "http://localhost:5173", // Default to localhost for local development
+    origin: "https://shoppy-cc0hdp7wl-nida-sagris-projects.vercel.app" || "http://localhost:5173", // Default to localhost for local development
     credentials: true,
   })
 );
