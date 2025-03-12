@@ -130,8 +130,7 @@ export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
   async (email, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "application/json" } ,
-      withCredentials: true };
+      const config = { headers: { "Content-Type": "application/json" }};
 
       const { data } = await axios.post(
         `https://shoppy-acc9.onrender.com/api/v1/password/forgot`,
