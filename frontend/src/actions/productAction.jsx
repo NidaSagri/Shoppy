@@ -29,7 +29,8 @@ export const getAdminProduct = createAsyncThunk(
   "products/getAdminProduct",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("https://shoppy-acc9.onrender.com/api/v1/admin/products");
+      const { data } = await axios.get("https://shoppy-acc9.onrender.com/api/v1/admin/products",
+        { withCredentials: true });
       return data.products;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -44,6 +45,7 @@ export const createProduct = createAsyncThunk(
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       };
 
       const { data } = await axios.post(
@@ -66,6 +68,7 @@ export const updateProduct = createAsyncThunk(
       
       const config = {
         headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       };
 
       const { data } = await axios.put(
@@ -86,7 +89,8 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.delete(`https://shoppy-acc9.onrender.com/api/v1/admin/product/${id}`);
+      const { data } = await axios.delete(`https://shoppy-acc9.onrender.com/api/v1/admin/product/${id}`,
+        { withCredentials: true });
       return data.success;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -114,6 +118,7 @@ export const newReview = createAsyncThunk(
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       };
 
       const { data } = await axios.put(`https://shoppy-acc9.onrender.com/api/v1/review`, reviewData, config);
@@ -129,7 +134,8 @@ export const getAllReviews = createAsyncThunk(
   "products/getAllReviews",
   async (productId, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`https://shoppy-acc9.onrender.com/api/v1/reviews?id=${productId}`);
+      const { data } = await axios.get(`https://shoppy-acc9.onrender.com/api/v1/reviews?id=${productId}`,
+        { withCredentials: true });
 
       return data.reviews;
     } catch (error) {
@@ -144,7 +150,8 @@ export const deleteReviews = createAsyncThunk(
   async ({ reviewId, productId }, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(
-        `https://shoppy-acc9.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`);
+        `https://shoppy-acc9.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`,
+        { withCredentials: true });
 
       return data.success;
     } catch (error) {

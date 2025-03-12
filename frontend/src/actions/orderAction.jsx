@@ -10,6 +10,7 @@ export const createOrder = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       };
 
       const { data } = await axios.post("https://shoppy-acc9.onrender.com/api/v1/order/new", order, config);
@@ -25,7 +26,9 @@ export const myOrders = createAsyncThunk(
   "order/createOrder",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("https://shoppy-acc9.onrender.com/api/v1/orders/me");
+      axios.get("https://shoppy-acc9.onrender.com/api/v1/orders/me", {
+        withCredentials: true,
+      });
       return data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -38,7 +41,8 @@ export const getOrderDetails = createAsyncThunk(
     "order/getOrderDetails",
     async (id, { rejectWithValue }) => {
       try {
-        const { data } = await axios.get(`https://shoppy-acc9.onrender.com/api/v1/order/${id}`);
+        const { data } = await axios.get(`https://shoppy-acc9.onrender.com/api/v1/order/${id}`,
+          { withCredentials: true });
         return data.order;
       } catch (error) {
         return rejectWithValue(error.response.data.message);
@@ -52,7 +56,8 @@ export const getAllOrders = createAsyncThunk(
   "order/getAllOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("https://shoppy-acc9.onrender.com/api/v1/admin/orders");
+      const { data } = await axios.get("https://shoppy-acc9.onrender.com/api/v1/admin/orders",
+        { withCredentials: true });
       return data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -69,6 +74,7 @@ export const updateOrder = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       };
       const { data } = await axios.put(
         `https://shoppy-acc9.onrender.com/api/v1/admin/order/${id}`,
@@ -88,7 +94,8 @@ export const deleteOrder = createAsyncThunk(
   "order/deleteOrder",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.delete(`https://shoppy-acc9.onrender.com/api/v1/admin/order/${id}`);
+      const { data } = await axios.delete(`https://shoppy-acc9.onrender.com/api/v1/admin/order/${id}`,
+        { withCredentials: true });
       return data.success;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
