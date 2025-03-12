@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import "./productList.css";
+import "./ProductList.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
