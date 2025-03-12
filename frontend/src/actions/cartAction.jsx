@@ -6,7 +6,7 @@ export const addItemsToCart = createAsyncThunk(
   "cart/addItemsToCart",
   async ({ id, quantity }, {rejectWithValue}) => {
     try {
-      const { data } = await axios.get(`/api/v1/product/${id}`);
+      const { data } = await axios.get(`https://shoppy-acc9.onrender.com/api/v1/product/${id}`);
       const item = {
         product: data.product._id,
         name: data.product.name,
