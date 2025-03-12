@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use(
   cors({
-    origin: "https://shoppyy.vercel.app/" || "http://localhost:5173", // Default to localhost for local development
+    origin: "https://shoppyy.vercel.app" || "http://localhost:5173", // Default to localhost for local development
     credentials: true,
   })
 );
