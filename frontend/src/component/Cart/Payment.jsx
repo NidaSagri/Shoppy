@@ -62,9 +62,10 @@ const Payment = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "https://shoppy-acc9.onrender.com/api/v1/payment/process",
         paymentData,
         config
       );
