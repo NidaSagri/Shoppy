@@ -41,13 +41,17 @@ import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
 import NotFound from "./component/layout/NotFound/NotFound";
 
-
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(
+      "https://shoppy-acc9.onrender.com/api/v1/stripeapikey",
+      {
+        withCredentials: true,
+      }
+    );
 
     setStripeApiKey(data.stripeApiKey);
   }
@@ -63,7 +67,10 @@ const App = () => {
     getStripeApiKey();
   }, []);
 
-  const stripePromise = useMemo(() => stripeApiKey ? loadStripe(stripeApiKey) : null, [stripeApiKey]);
+  const stripePromise = useMemo(
+    () => (stripeApiKey ? loadStripe(stripeApiKey) : null),
+    [stripeApiKey]
+  );
 
   return (
     <>
@@ -93,7 +100,6 @@ const App = () => {
           <Route path="/order/confirm" element={<ConfirmOrder />} />
         )}
 
-
         <Route
           path="/process/payment"
           element={
@@ -107,23 +113,43 @@ const App = () => {
           }
         />
 
-        {isAuthenticated && <Route path="/success" element={<OrderSuccess />} />}
+        {isAuthenticated && (
+          <Route path="/success" element={<OrderSuccess />} />
+        )}
         {isAuthenticated && <Route path="/orders/me" element={<MyOrders />} />}
-        {isAuthenticated && <Route path="/order/:id" element={<OrderDetails/>} />}
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/dashboard" Component={Dashboard} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/products" Component={ProductList} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/product" Component={NewProduct} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/product/:id" Component={UpdateProduct} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/orders" Component={OrderList} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/order/:id" Component={ProcessOrder} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/users" Component={UsersList} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/user/:id" Component={UpdateUser} />}    
-        {isAuthenticated && user.role==="admin" && <Route exact path="/admin/reviews" Component={ProductReviews} />}    
+        {isAuthenticated && (
+          <Route path="/order/:id" element={<OrderDetails />} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/dashboard" Component={Dashboard} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/products" Component={ProductList} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/product" Component={NewProduct} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/product/:id" Component={UpdateProduct} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/orders" Component={OrderList} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/order/:id" Component={ProcessOrder} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/users" Component={UsersList} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/user/:id" Component={UpdateUser} />
+        )}
+        {isAuthenticated && user.role === "admin" && (
+          <Route exact path="/admin/reviews" Component={ProductReviews} />
+        )}
         <Route path="*" element={<NotFound />} />
-
-
       </Routes>
-      
+
       <Footer />
     </>
   );
