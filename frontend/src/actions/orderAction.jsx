@@ -23,7 +23,7 @@ export const createOrder = createAsyncThunk(
 
 // My Orders
 export const myOrders = createAsyncThunk(
-  "order/createOrder",
+  "order/myOrders",
   async (_, { rejectWithValue }) => {
     try {
       axios.get("https://shoppy-acc9.onrender.com/api/v1/orders/me", {
