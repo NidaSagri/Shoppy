@@ -26,7 +26,7 @@ export const myOrders = createAsyncThunk(
   "order/myOrders",
   async (_, { rejectWithValue }) => {
     try {
-      axios.get("https://shoppy-acc9.onrender.com/api/v1/orders/me", {
+      const { data } =  axios.get("https://shoppy-acc9.onrender.com/api/v1/orders/me", {
         withCredentials: true,
       });
       return data.orders;
